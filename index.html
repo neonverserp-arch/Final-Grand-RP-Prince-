@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grand RP Access</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+body{
+background:#050505;
+color:#fff;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+
+/* ================= VERIFICATION SCREEN ================= */
+#verify{
+position:fixed;
+inset:0;
+background:#000;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:999;
+color:#00ffd5;
+font-weight:bold;
+}
+
+.loader{
+width:220px;
+height:6px;
+background:#111;
+border-radius:10px;
+overflow:hidden;
+margin-top:20px;
+}
+.loader span{
+display:block;
+height:100%;
+width:0;
+background:linear-gradient(90deg,#00ffd5,#007bff);
+animation:load 4s forwards;
+}
+@keyframes load{
+100%{width:100%;}
+}
+
+/* ================= MAIN CARD ================= */
+.card{
+width:95%;
+max-width:420px;
+background:#0b0b0b;
+border-radius:20px;
+padding:20px;
+box-shadow:0 0 25px #00ffd5;
+}
+
+h2{
+text-align:center;
+color:#00ffd5;
+margin-bottom:15px;
+animation:neon 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes neon{
+0%{text-shadow:0 0 5px #00ffd5,0 0 10px #00ffd5,0 0 20px #00ffd5;}
+50%{text-shadow:0 0 10px #ff00ff,0 0 20px #ff00ff,0 0 30px #ff00ff;}
+100%{text-shadow:0 0 5px #00ffd5,0 0 10px #00ffd5,0 0 20px #00ffd5;}
+}
+
+/* ================= PRICE LIST ================= */
+.option{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:14px;
+margin:10px 0;
+background:#111;
+border-radius:14px;
+border:2px solid transparent;
+transition:.3s;
+cursor:pointer;
+}
+
+.option input{accent-color:#00ffd5}
+
+.option.active{
+border-color:#00ffd5;
+box-shadow:0 0 15px #00ffd5;
+transform:scale(1.02);
+transition:.2s;
+}
+
+/* ================= BUTTON ================= */
+.btn{
+width:100%;
+margin-top:15px;
+padding:14px;
+border:none;
+border-radius:30px;
+font-size:16px;
+background:linear-gradient(90deg,#00ffd5,#007bff);
+color:#000;
+cursor:pointer;
+box-shadow:0 0 20px #00ffd5;
+transition:.3s;
+}
+
+.btn:hover{
+box-shadow:0 0 25px #ff00ff,0 0 35px #00ffd5;
+transform:scale(1.03);
+}
+
+/* ================= FINAL PRICE ================= */
+.final{
+text-align:center;
+font-size:20px;
+margin-top:15px;
+color:#00ffd5;
+animation:neon 1.5s ease-in-out infinite alternate;
+}
+
+/* ================= PAYMENT ================= */
+.payment{
+margin-top:15px;
+background:#111;
+padding:15px;
+border-radius:14px;
+text-align:center;
+}
+
+.payment a{
+display:block;
+margin:10px 0;
+padding:10px;
+border-radius:15px;
+text-decoration:none;
+background:linear-gradient(90deg,#00ffd5,#007bff);
+color:#000;
+transition:.3s;
+text-align:center;
+}
+
+.payment a:hover{
+color:#fff;
+box-shadow:0 0 15px #ff00ff,0 0 25px #00ffd5;
+}
+
+/* ================= WARNING ================= */
+.warn{
+position:fixed;
+bottom:10px;
+right:10px;
+font-size:10px;
+opacity:.3;
+}
+</style>
+</head>
+
+<body>
+
+<!-- VERIFY -->
+<div id="verify">
+<div>Connecting Secure Server...</div>
+<div class="loader"><span></span></div>
+<button id="startBtn" class="btn">Start Verification</button>
+</div>
+
+<!-- MAIN -->
+<div class="card hidden" id="main">
+
+<h2>Grand RP Price 📋</h2>
+
+<div class="option">
+<label><input type="radio" name="price" value="120"> ₹120</label>
+<span>1 Day</span>
+</div>
+
+<div class="option">
+<label><input type="radio" name="price" value="299"> ₹299</label>
+<span>3 Days</span>
+</div>
+
+<div class="option">
+<label><input type="radio" name="price" value="539"> ₹539</label>
+<span>7 Days</span>
+</div>
+
+<div class="option">
+<label><input type="radio" name="price" value="899"> ₹899</label>
+<span>30 Days</span>
+</div>
+
+<div class="option">
+<label><input type="radio" name="price" value="999"> ₹999</label>
+<span>Permanent</span>
+</div>
+
+<input id="coupon" placeholder="Enter Coupon" style="width:100%;padding:12px;border-radius:25px;border:none;margin-top:10px;text-align:center;">
+
+<button class="btn" onclick="applyCoupon()">Apply Coupon</button>
+
+<div class="final" id="final">Final Price: ₹0</div>
+
+<button class="btn" onclick="showPayment()">Continue →</button>
+
+<div class="payment hidden" id="pay">
+<a href="https://www.mediafire.com/view/58qyqi70gd3t4kt/Screenshot_2026-01-30-15-06-03-09-ba41e9a642e6e0e2b03656bfbbffd6e4.jpg/file" target="_blank">📸 Open QR Scanner</a>
+<a href="https://discord.gg/H2S7h6Du" target="_blank">💬 Contact Me (Discord)</a>
+<a href="https://discord.gg/4mvjSKZXzG" target="_blank">💬 Join Discord Channel</a>
+
+<p>Please Payment Here And Send Screenshot In DM</p>
+
+<p>Benefits:</p>
+<p>✔ 24/7 Owner Support</p>
+<p>✔ Unlimited Game Currency 💵</p>
+<p>✔ Screen Share Setup</p>
+</div>
+
+</div>
+
+<div class="warn">Protected UI • Inspect Disabled</div>
+
+<!-- SOUND -->
+<audio id="click" src="https://freesound.org/data/previews/522/522208_964913-lq.mp3"></audio>
+<audio id="success" src="https://freesound.org/data/previews/399/399995_5121236-lq.mp3"></audio>
+<audio id="error" src="https://freesound.org/data/previews/395/395174_5121236-lq.mp3"></audio>
+<audio id="verifyS" src="https://freesound.org/data/previews/403/403274_5121236-lq.mp3"></audio>
+
+<script>
+const clickS=document.getElementById("click");
+const successS=document.getElementById("success");
+const errorS=document.getElementById("error");
+const verifyS=document.getElementById("verifyS");
+const startBtn=document.getElementById("startBtn");
+
+let basePrice=0;
+let finalPrice=0;
+
+// ================= PRICE SELECTION =================
+document.querySelectorAll(".option").forEach(opt=>{
+opt.onclick=()=>{
+document.querySelectorAll(".option").forEach(o=>o.classList.remove("active"));
+opt.classList.add("active");
+basePrice = Number(opt.querySelector("input").value);
+finalPrice = basePrice;
+document.getElementById("final").innerText="Final Price: ₹"+finalPrice;
+clickS.play();
+}
+});
+
+// ================= COUPON =================
+function applyCoupon(){
+let c=document.getElementById("coupon").value.toUpperCase();
+if(basePrice===0){errorS.play();return;}
+let discount=0;
+if(c==="RUDRA") discount=20;
+else if(c==="PRIN") discount=50;
+else if(c==="JONA") discount=70;
+finalPrice = Math.max(basePrice - discount,0);
+document.getElementById("final").innerText="Final Price: ₹"+finalPrice;
+successS.play();
+}
+
+// ================= PAYMENT =================
+function showPayment(){
+document.getElementById("pay").classList.remove("hidden");
+clickS.play();
+}
+
+// ================= VERIFICATION =====================
+startBtn.onclick = () => {
+document.getElementById("verify").style.display="none";
+document.getElementById("main").classList.remove("hidden");
+verifyS.play();
+}
+
+// VISUAL ANTI INSPECT
+document.addEventListener("contextmenu",e=>e.preventDefault());
+</script>
+
+</body>
+</html>
