@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Grand RP Access</title>
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif;}
+
 body{
 background:#050505;
 color:#fff;
@@ -15,7 +17,7 @@ align-items:center;
 min-height:100vh;
 }
 
-/* ================= VERIFICATION SCREEN ================= */
+/* ================= VERIFICATION ================= */
 #verify{
 position:fixed;
 inset:0;
@@ -27,6 +29,7 @@ align-items:center;
 z-index:999;
 color:#00ffd5;
 font-weight:bold;
+text-align:center;
 }
 
 .loader{
@@ -35,7 +38,7 @@ height:6px;
 background:#111;
 border-radius:10px;
 overflow:hidden;
-margin-top:20px;
+margin:20px 0;
 }
 .loader span{
 display:block;
@@ -44,11 +47,9 @@ width:0;
 background:linear-gradient(90deg,#00ffd5,#007bff);
 animation:load 4s forwards;
 }
-@keyframes load{
-100%{width:100%;}
-}
+@keyframes load{100%{width:100%;}}
 
-/* ================= MAIN CARD ================= */
+/* ================= CARD ================= */
 .card{
 width:95%;
 max-width:420px;
@@ -58,20 +59,22 @@ padding:20px;
 box-shadow:0 0 25px #00ffd5;
 }
 
+.hidden{display:none}
+
 h2{
 text-align:center;
 color:#00ffd5;
 margin-bottom:15px;
-animation:neon 1.5s ease-in-out infinite alternate;
+animation:neon 1.5s infinite alternate;
 }
 
 @keyframes neon{
-0%{text-shadow:0 0 5px #00ffd5,0 0 10px #00ffd5,0 0 20px #00ffd5;}
-50%{text-shadow:0 0 10px #ff00ff,0 0 20px #ff00ff,0 0 30px #ff00ff;}
-100%{text-shadow:0 0 5px #00ffd5,0 0 10px #00ffd5,0 0 20px #00ffd5;}
+0%{text-shadow:0 0 5px #00ffd5;}
+50%{text-shadow:0 0 15px #ff00ff;}
+100%{text-shadow:0 0 5px #00ffd5;}
 }
 
-/* ================= PRICE LIST ================= */
+/* ================= OPTIONS ================= */
 .option{
 display:flex;
 justify-content:space-between;
@@ -81,8 +84,8 @@ margin:10px 0;
 background:#111;
 border-radius:14px;
 border:2px solid transparent;
-transition:.3s;
 cursor:pointer;
+transition:.2s;
 }
 
 .option input{accent-color:#00ffd5}
@@ -91,7 +94,6 @@ cursor:pointer;
 border-color:#00ffd5;
 box-shadow:0 0 15px #00ffd5;
 transform:scale(1.02);
-transition:.2s;
 }
 
 /* ================= BUTTON ================= */
@@ -108,19 +110,14 @@ cursor:pointer;
 box-shadow:0 0 20px #00ffd5;
 transition:.3s;
 }
+.btn:hover{transform:scale(1.03)}
 
-.btn:hover{
-box-shadow:0 0 25px #ff00ff,0 0 35px #00ffd5;
-transform:scale(1.03);
-}
-
-/* ================= FINAL PRICE ================= */
+/* ================= FINAL ================= */
 .final{
 text-align:center;
 font-size:20px;
 margin-top:15px;
 color:#00ffd5;
-animation:neon 1.5s ease-in-out infinite alternate;
 }
 
 /* ================= PAYMENT ================= */
@@ -130,26 +127,21 @@ background:#111;
 padding:15px;
 border-radius:14px;
 text-align:center;
+display:none;
 }
 
 .payment a{
 display:block;
 margin:10px 0;
-padding:10px;
+padding:12px;
 border-radius:15px;
 text-decoration:none;
 background:linear-gradient(90deg,#00ffd5,#007bff);
 color:#000;
-transition:.3s;
-text-align:center;
+font-weight:bold;
 }
 
-.payment a:hover{
-color:#fff;
-box-shadow:0 0 15px #ff00ff,0 0 25px #00ffd5;
-}
-
-/* ================= WARNING ================= */
+/* ================= FOOTER ================= */
 .warn{
 position:fixed;
 bottom:10px;
@@ -174,32 +166,14 @@ opacity:.3;
 
 <h2>Grand RP Price 📋</h2>
 
-<div class="option">
-<label><input type="radio" name="price" value="120"> ₹120</label>
-<span>1 Day</span>
-</div>
+<div class="option"><label><input type="radio" name="p" value="120"> ₹120</label><span>1 Day</span></div>
+<div class="option"><label><input type="radio" name="p" value="299"> ₹299</label><span>3 Days</span></div>
+<div class="option"><label><input type="radio" name="p" value="539"> ₹539</label><span>7 Days</span></div>
+<div class="option"><label><input type="radio" name="p" value="899"> ₹899</label><span>30 Days</span></div>
+<div class="option"><label><input type="radio" name="p" value="999"> ₹999</label><span>Permanent</span></div>
 
-<div class="option">
-<label><input type="radio" name="price" value="299"> ₹299</label>
-<span>3 Days</span>
-</div>
-
-<div class="option">
-<label><input type="radio" name="price" value="539"> ₹539</label>
-<span>7 Days</span>
-</div>
-
-<div class="option">
-<label><input type="radio" name="price" value="899"> ₹899</label>
-<span>30 Days</span>
-</div>
-
-<div class="option">
-<label><input type="radio" name="price" value="999"> ₹999</label>
-<span>Permanent</span>
-</div>
-
-<input id="coupon" placeholder="Enter Coupon" style="width:100%;padding:12px;border-radius:25px;border:none;margin-top:10px;text-align:center;">
+<input id="coupon" placeholder="Enter Coupon"
+style="width:100%;padding:12px;border-radius:25px;border:none;margin-top:10px;text-align:center;">
 
 <button class="btn" onclick="applyCoupon()">Apply Coupon</button>
 
@@ -207,9 +181,17 @@ opacity:.3;
 
 <button class="btn" onclick="showPayment()">Continue →</button>
 
-<div class="payment hidden" id="pay">
-<a href="https://www.mediafire.com/view/58qyqi70gd3t4kt/Screenshot_2026-01-30-15-06-03-09-ba41e9a642e6e0e2b03656bfbbffd6e4.jpg/file" target="_blank">📸 Open QR Scanner</a>
-<a href="https://discord.gg/H2S7h6Du" target="_blank">💬 Contact Me (Discord)</a>
+<div class="payment" id="pay">
+
+<a href="https://www.mediafire.com/view/58qyqi70gd3t4kt/Screenshot_2026-01-30-15-06-03-09-ba41e9a642e6e0e2b03656bfbbffd6e4.jpg/file" target="_blank">
+📸 Scanner Button
+</a>
+
+<!-- 🔴 CONTACT LINK CHANGED HERE 🔴 -->
+<a href="https://www.mediafire.com/view/faw29z32yid1vq4/file_00000000a7207206b325dca17b7f590f.png/file" target="_blank">
+📩 Contact Me
+</a>
+
 <a href="https://discord.gg/4mvjSKZXzG" target="_blank">💬 Join Discord Channel</a>
 
 <p>Please Payment Here And Send Screenshot In DM</p>
@@ -222,64 +204,52 @@ opacity:.3;
 
 </div>
 
-<div class="warn">Protected UI • Inspect Disabled</div>
+<div class="warn">Protected UI • Visual Only</div>
 
 <!-- SOUND -->
 <audio id="click" src="https://freesound.org/data/previews/522/522208_964913-lq.mp3"></audio>
 <audio id="success" src="https://freesound.org/data/previews/399/399995_5121236-lq.mp3"></audio>
 <audio id="error" src="https://freesound.org/data/previews/395/395174_5121236-lq.mp3"></audio>
-<audio id="verifyS" src="https://freesound.org/data/previews/403/403274_5121236-lq.mp3"></audio>
 
 <script>
 const clickS=document.getElementById("click");
 const successS=document.getElementById("success");
 const errorS=document.getElementById("error");
-const verifyS=document.getElementById("verifyS");
-const startBtn=document.getElementById("startBtn");
 
-let basePrice=0;
-let finalPrice=0;
+let basePrice=0, finalPrice=0;
 
-// ================= PRICE SELECTION =================
-document.querySelectorAll(".option").forEach(opt=>{
-opt.onclick=()=>{
-document.querySelectorAll(".option").forEach(o=>o.classList.remove("active"));
-opt.classList.add("active");
-basePrice = Number(opt.querySelector("input").value);
-finalPrice = basePrice;
+document.querySelectorAll(".option").forEach(o=>{
+o.onclick=()=>{
+document.querySelectorAll(".option").forEach(x=>x.classList.remove("active"));
+o.classList.add("active");
+basePrice=Number(o.querySelector("input").value);
+finalPrice=basePrice;
 document.getElementById("final").innerText="Final Price: ₹"+finalPrice;
 clickS.play();
 }
 });
 
-// ================= COUPON =================
 function applyCoupon(){
-let c=document.getElementById("coupon").value.toUpperCase();
-if(basePrice===0){errorS.play();return;}
-let discount=0;
-if(c==="RUDRA") discount=20;
-else if(c==="PRIN") discount=50;
-else if(c==="JONA") discount=70;
-finalPrice = Math.max(basePrice - discount,0);
+if(basePrice===0){errorS.play();return alert("Select price first");}
+let c=coupon.value.toUpperCase(),d=0;
+if(c==="RUDRA")d=20;
+if(c==="PRIN")d=50;
+if(c==="JONA")d=70;
+finalPrice=Math.max(basePrice-d,0);
 document.getElementById("final").innerText="Final Price: ₹"+finalPrice;
 successS.play();
 }
 
-// ================= PAYMENT =================
 function showPayment(){
-document.getElementById("pay").classList.remove("hidden");
+if(basePrice===0){errorS.play();return alert("Select price first");}
+document.getElementById("pay").style.display="block";
 clickS.play();
 }
 
-// ================= VERIFICATION =====================
-startBtn.onclick = () => {
+startBtn.onclick=()=>{
 document.getElementById("verify").style.display="none";
 document.getElementById("main").classList.remove("hidden");
-verifyS.play();
 }
-
-// VISUAL ANTI INSPECT
-document.addEventListener("contextmenu",e=>e.preventDefault());
 </script>
 
 </body>
